@@ -8,7 +8,7 @@ public class LFUCache<K, V> implements Cache<K, V>{
     }
 
     @Override
-    public void put(Object o, Object o2) {
+    public void add(Object o, Object o2) {
 
     }
 

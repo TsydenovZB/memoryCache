@@ -1,11 +1,9 @@
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 public class LRUCache<K, V> implements Cache<K, V> {
 
-    Map<K, V> map = new LinkedHashMap<K, V>();
-    LinkedList<K> list = new LinkedList<K>();
+    LinkedHashMap<K, V> map = new LinkedHashMap<K, V>();
     int size = 0;
 
     public LRUCache(final int SIZE) {
@@ -14,25 +12,22 @@ public class LRUCache<K, V> implements Cache<K, V> {
 
     @Override
     public V get(K key) {
-        V v = null;
+        V value = null;
         if (map.containsKey(key)) {
-            list.remove(key);
-            v = map.get(key);
-            list.add(key);
+            value = map.get(key);
+            map.remove(key);
+            map.put(key, value);
         }
-        return v;
+        return value;
     }
 
     @Override
-    public void put(K key, V value) {
-        if (map.containsKey(key)) {
-            list.remove(key);
+    public void add(K key, V value) {
+        map.remove(key);
+        if (map.size() >= size) {
+            K currentKey = map.keySet().iterator().next();
+            map.remove(currentKey);
         }
-        if (list.size() >= size) {
-            K listKey = list.poll();
-            map.remove(listKey);
-        }
-        list.add(key);
         map.put(key, value);
     }
 
@@ -41,11 +36,6 @@ public class LRUCache<K, V> implements Cache<K, V> {
         V v = null;
         if (map.containsKey(key)) {
             v = map.remove(key);
-            list.remove(key);
-        } else try {
-            throw new Exception("Key not found");
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
