@@ -1,12 +1,12 @@
 import java.util.Map;
 
-public interface Cache<K,V> {
+public interface Cache<V> {
 
-    public V get (K k);
+    public V get (Integer id);
 
-    public void add(K k, V v);
+    public void add(V v);
 
-    public void remove(K k);
+    public void remove(Integer id);
 
-    public Map<K, V> model();
+    public Map<Integer, V> model();
 }

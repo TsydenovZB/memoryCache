@@ -1,11 +1,12 @@
+import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-
-public class TestLRU {
-
+public class TestLFU extends TestCase {
     public static void assertModel(Cache<Object> cache, Object... keysAndValues) {
         List<Object> actualKeysAndValues = new ArrayList<>();
         for (Map.Entry<Integer, Object> entry : cache.model().entrySet()) {
@@ -16,17 +17,20 @@ public class TestLRU {
 
     @Test
     public void test() {
-        Cache<Object> cache = new LRUCache<>(3);
+        Cache<Object> cache = new LFUCache<>(3);
 
         cache.add("one");
+        cache.get(1);
         cache.add("two");
         assertModel(cache, "one", "two");
         cache.add("three");
         cache.get(1);
-        cache.add("four");
         cache.get(1);
+        cache.get(1);
+        cache.add("four");
         cache.add("five");
-        assertModel(cache, "four", "one", "five");
+        cache.add("six");
+        assertModel(cache, "one", "five", "six");
 
         System.out.println(cache.toString());
     }

@@ -1,9 +1,10 @@
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class LRUCache<K, V> implements Cache<K, V> {
+public class LRUCache<V> implements Cache<V> {
 
-    LinkedHashMap<K, V> map = new LinkedHashMap<K, V>();
+    LinkedHashMap<Integer, V> map = new LinkedHashMap<>();
+    int count = 0;
     int size = 0;
 
     public LRUCache(final int SIZE) {
@@ -11,42 +12,38 @@ public class LRUCache<K, V> implements Cache<K, V> {
     }
 
     @Override
-    public V get(K key) {
+    public V get(Integer id) {
         V value = null;
-        if (map.containsKey(key)) {
-            value = map.get(key);
-            map.remove(key);
-            map.put(key, value);
+        if (map.containsKey(id)) {
+            value = map.get(id);
+            map.remove(id);
+            map.put(id, value);
         }
         return value;
     }
 
     @Override
-    public void add(K key, V value) {
-        map.remove(key);
+    public void add(V value) {
         if (map.size() >= size) {
-            K currentKey = map.keySet().iterator().next();
+            Integer currentKey = map.keySet().iterator().next();
             map.remove(currentKey);
         }
-        map.put(key, value);
+        map.put(++count, value);
     }
 
     @Override
-    public void remove(K key) {
-        V v = null;
-        if (map.containsKey(key)) {
-            v = map.remove(key);
-        }
+    public void remove(Integer key) {
+        map.remove(key);
     }
 
     @Override
-    public Map<K, V> model() {
+    public Map<Integer, V> model() {
         return new LinkedHashMap<>(map);
     }
 
     @Override
     public String toString() {
-        return "LRUCache{" +
+        return "LRUCache {" +
                 "map=" + map +
                 '}';
     }
