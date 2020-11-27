@@ -51,11 +51,4 @@ public class LFUCache<V> implements Cache<V> {
     public Map<Integer, V> model() {
         return new LinkedHashMap<>(map);
     }
-
-    @Override
-    public String toString() {
-        return "LFUCache {" +
-                "map=" + map +
-                '}';
-    }
 }

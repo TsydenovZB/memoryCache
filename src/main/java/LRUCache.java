@@ -5,7 +5,7 @@ public class LRUCache<V> implements Cache<V> {
 
     LinkedHashMap<Integer, V> map = new LinkedHashMap<>();
     int count = 0;
-    int size = 0;
+    int size;
 
     public LRUCache(final int SIZE) {
         this.size = SIZE;
@@ -39,12 +39,5 @@ public class LRUCache<V> implements Cache<V> {
     @Override
     public Map<Integer, V> model() {
         return new LinkedHashMap<>(map);
-    }
-
-    @Override
-    public String toString() {
-        return "LRUCache {" +
-                "map=" + map +
-                '}';
     }
 }
