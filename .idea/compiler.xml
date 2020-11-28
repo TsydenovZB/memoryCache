@@ -9,5 +9,6 @@
         <module name="memoryCache" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="14" />
   </component>
 </project>

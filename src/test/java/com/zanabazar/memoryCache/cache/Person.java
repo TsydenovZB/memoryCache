@@ -1,3 +1,5 @@
+package com.zanabazar.memoryCache.cache;
+
 public class Person {
     private int id;
     private String firstName;
@@ -5,24 +7,16 @@ public class Person {
     private String email;
     private Gender gender;
 
-    enum Gender {
+    public enum Gender {
         MALE, FEMALE
     }
 
-    public Person(int id, String firstName, String lastName, String email, Gender gender) {
-        this.id = id;
+    public Person(String firstName, String lastName, String email, Gender gender) {
+        id = ++id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.gender = gender;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -59,6 +53,12 @@ public class Person {
 
     @Override
     public String toString() {
-        return id + ":" + firstName;
+        return "Person{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", gender=" + gender +
+                '}';
     }
 }

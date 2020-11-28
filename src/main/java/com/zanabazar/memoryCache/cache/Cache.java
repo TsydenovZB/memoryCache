@@ -1,3 +1,6 @@
+package com.zanabazar.memoryCache.cache;
+
+import java.util.Collection;
 import java.util.Map;
 
 public interface Cache<V> {
@@ -9,4 +12,6 @@ public interface Cache<V> {
     public void remove(Integer id);
 
     public Map<Integer, V> model();
+
+    public Collection<V> showAll();
 }

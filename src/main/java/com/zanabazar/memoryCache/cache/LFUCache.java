@@ -1,6 +1,6 @@
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.Map;
+package com.zanabazar.memoryCache.cache;
+
+import java.util.*;
 
 public class LFUCache<V> implements Cache<V> {
 
@@ -50,5 +50,10 @@ public class LFUCache<V> implements Cache<V> {
     @Override
     public Map<Integer, V> model() {
         return new LinkedHashMap<>(map);
+    }
+
+    @Override
+    public Collection<V> showAll() {
+        return map.values();
     }
 }

@@ -1,3 +1,6 @@
+package com.zanabazar.memoryCache.cache;
+
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -39,5 +42,10 @@ public class LRUCache<V> implements Cache<V> {
     @Override
     public Map<Integer, V> model() {
         return new LinkedHashMap<>(map);
+    }
+
+    @Override
+    public Collection<V> showAll() {
+        return map.values();
     }
 }
