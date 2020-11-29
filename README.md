@@ -11,7 +11,7 @@ Removal strategies used:
 
 The application takes two arguments as input:
 1. **size** - sets the cache size.
-2. **algorithm removes** - takes two values *LRU* and *LFU* (default is LRU).
+2. **algorithm removes** - takes two values *LRU* or *LFU* (default is LRU).
 
 ### Controller
 
