@@ -1,0 +1,5 @@
+com\zanabazar\memoryCache\cache\TestStrategy.class
+com\zanabazar\memoryCache\cache\TestStrategyLRU.class
+com\zanabazar\memoryCache\cache\TestStrategyLFU.class
+com\zanabazar\memoryCache\cache\Person$Gender.class
+com\zanabazar\memoryCache\cache\Person.class
