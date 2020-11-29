@@ -13,6 +13,8 @@ The application takes two arguments as input:
 1. **size** - sets the cache size.
 2. **algorithm removes** - takes two values *LRU* or *LFU* (default is LRU).
 
+The application receives different objects and stores it in the cache.    
+
 ### Controller
 
 The controller receives and sends HTTP requests.
