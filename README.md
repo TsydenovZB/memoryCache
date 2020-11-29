@@ -58,7 +58,9 @@ cache.put("A");
 | delete        | O(1) | O(1) |
 
 ## Start
-
+```sh
+java -jar memoryCache-1.0-SNAPSHOT.jar [cache size] [LRU/LFU]
+```
 ## Test
 
 ```sh
