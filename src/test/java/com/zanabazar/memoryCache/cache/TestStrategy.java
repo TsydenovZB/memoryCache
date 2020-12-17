@@ -21,7 +21,7 @@ public class TestStrategy {
     public Person person10 = new Person("Dan", "St Leger", "dstleger9@over-blog.com", Person.Gender.MALE);
 
 
-    public static void assertModel(Cache<Object> cache, Object... keysAndValues) {
+    public static void assertModel(Cache<Integer, Object> cache, Object... keysAndValues) {
         List<Object> actualKeysAndValues = new ArrayList<>();
         for (Map.Entry<Integer, Object> entry : cache.model().entrySet()) {
             actualKeysAndValues.add(entry.getValue());

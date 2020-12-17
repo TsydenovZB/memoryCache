@@ -1,17 +1,16 @@
 package com.zanabazar.memoryCache.cache;
 
-import java.util.Collection;
 import java.util.Map;
 
-public interface Cache<V> {
+public interface Cache<K, V> {
 
-    public V get (Integer id);
+    V get(K key);
 
-    public void add(V v);
+    void add(K k, V v);
 
-    public void remove(Integer id);
+    void remove(K key);
 
-    public Map<Integer, V> model();
+    Map<K, V> showAll();
 
-    public Collection<V> showAll();
+    Map<K, V> model();
 }

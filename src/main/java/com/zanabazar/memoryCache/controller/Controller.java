@@ -4,12 +4,12 @@ import com.zanabazar.memoryCache.Application;
 import com.zanabazar.memoryCache.cache.Cache;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import java.util.Map;
 
 @RestController
 @RequestMapping
 public class Controller {
-    Cache<Object> cache = Application.cache;
+    Cache<Object, Object> cache = Application.cache;
 
     @GetMapping("{id}")
     public Object get(@PathVariable("id") Integer id) {
@@ -17,18 +17,18 @@ public class Controller {
     }
 
     @GetMapping
-    public Collection<Object> getAll() {
+    public Map<Object, Object> getAll() {
         return cache.showAll();
     }
 
     @PostMapping
-    public Collection<Object> add(@RequestBody Object o) {
-        cache.add(o);
+    public Map<Object, Object> add(@RequestBody Map<Object, Object> map) {
+        cache.add(map.get("key"), map.get("value"));
         return cache.showAll();
     }
 
     @DeleteMapping("{id}")
-    public Collection<Object> delete(@PathVariable("id") Integer id) {
+    public Map<Object, Object> delete(@PathVariable("id") Integer id) {
         cache.remove(id);
         return cache.showAll();
     }

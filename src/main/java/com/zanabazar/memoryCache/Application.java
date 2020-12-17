@@ -8,13 +8,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Application {
-    public static Cache<Object> cache;
+    public static Cache<Object, Object> cache;
     public static Integer size;
 
     public static void main(String[] args) {
-        size = Integer.valueOf(args[0]);
-        cache = args[1].equals("LFU") ? new LFUCache<>(size) : new LRUCache<>(size);
-
+        try {
+            size = Integer.valueOf(args[0]);
+            cache = args[1].equals("LFU") ? new LFUCache<>(size) : new LRUCache<>(size);
+        } catch (NullPointerException e ) {
+            e.getMessage();
+        }
         SpringApplication.run(Application.class, args);
     }
 }

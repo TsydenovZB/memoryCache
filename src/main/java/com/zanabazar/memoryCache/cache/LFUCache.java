@@ -2,58 +2,57 @@ package com.zanabazar.memoryCache.cache;
 
 import java.util.*;
 
-public class LFUCache<V> implements Cache<V> {
+public class LFUCache<K, V> implements Cache<K, V> {
 
-    LinkedHashMap<Integer, V> map = new LinkedHashMap<Integer, V>();
-    LinkedList<Integer> frequency = new LinkedList<>();
-    int count = 0;
-    int size = 0;
+    LinkedHashMap<K, V> map = new LinkedHashMap<>();
+    HashMap<K, Integer> frequency = new HashMap<>();
+    int size;
 
     public LFUCache(int size) {
         this.size = size;
     }
 
     @Override
-    public V get(Integer id) {
-        frequency.set(id - 1, frequency.get(id - 1) + 1);
-        return map.get(id);
+    public V get(K key) {
+        frequency.put(key, frequency.get(key)+1);
+        return map.get(key);
     }
 
     @Override
-    public void add(V value) {
+    public void add(K key, V value) {
         if (map.size() >= size) {
-            int entryKeyToBeRemoved = getLFUKey();
+            K entryKeyToBeRemoved = getLFUKey();
             map.remove(entryKeyToBeRemoved);
         }
-        map.put(++count, value);
-        frequency.add(0);
+        map.put(key, value);
+        frequency.put(key, 0);
     }
 
-    private int getLFUKey() {
-        int key = 0;
+    private K getLFUKey() {
+        K key = null;
         int minFreq = Integer.MAX_VALUE;
 
-        for (Map.Entry<Integer, V> entry : map.entrySet()) {
-            if (minFreq > frequency.get(entry.getKey() - 1)) {
+        for (Map.Entry<K, V> entry : map.entrySet()) {
+            if (minFreq > frequency.get(entry.getKey())) {
                 key = entry.getKey();
-                minFreq = frequency.get(entry.getKey() - 1);
+                minFreq = frequency.get(entry.getKey());
             }
         }
         return key;
     }
-
     @Override
-    public void remove(Integer id) {
-        map.remove(id);
+    public void remove(K key) {
+        frequency.remove(key);
+        map.remove(key);
     }
 
     @Override
-    public Map<Integer, V> model() {
+    public Map<K, V> model() {
         return new LinkedHashMap<>(map);
     }
 
     @Override
-    public Collection<V> showAll() {
-        return map.values();
+    public Map<K, V> showAll() {
+        return map;
     }
 }
