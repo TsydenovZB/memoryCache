@@ -11,7 +11,9 @@ Removal strategies used:
 
 The application takes two arguments as input:
 1. **size** - sets the cache size.
-2. **algorithm removes** - takes two values *LRU* and *LFU* (default is LRU).
+2. **algorithm removes** - takes two values *LRU* or *LFU* (default is LRU).
+
+The application receives different objects and stores it in the cache.    
 
 ### Controller
 
@@ -58,7 +60,9 @@ cache.put("A");
 | delete        | O(1) | O(1) |
 
 ## Start
-
+```sh
+java -jar memoryCache-1.0-SNAPSHOT.jar [cache size] [LRU/LFU]
+```
 ## Test
 
 ```sh
